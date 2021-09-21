@@ -22,17 +22,18 @@ namespace TechJobsMVC.Controllers
         // TODO #3: Create an action method to process a search request and render the updated search view.
         public IActionResult Results(string searchType, string searchTerm)
         {
-            List<Job> jobs;
+            List<Job> jobResults;
 
             if (String.IsNullOrEmpty(searchTerm))
             {
-                jobs = JobData.FindAll();
-            } else
+                jobResults = JobData.FindAll();
+            }
+            else
             {
-                jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+                jobResults = JobData.FindByColumnAndValue(searchType, searchTerm);
             }
 
-            ViewBag.jobs = jobs;
+            ViewBag.jobs = jobResults;
             ViewBag.title = "Jobs with " + searchTerm;
             ViewBag.columns = ListController.ColumnChoices; //idk about this???––just re-wrote from above but idk if needed to be rewritten?//
             return View("Index");
